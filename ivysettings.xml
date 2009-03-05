@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ivysettings>
+
+	<settings defaultResolver="spring-chain" />
+	
+	<resolvers>
+		<chain name="spring-chain">
+			<url name="com.springsource.bundles.release">
+				<ivy pattern="http://www.springsource.com/ivy/bundles/release/[organisation]/[module]/[revision]/[artifact]-[revision].[ext]" />
+				<artifact pattern="http://www.springsource.com/ivy/bundles/release/[organisation]/[module]/[revision]/[artifact]-[revision].[ext]" />
+			</url>
+		</chain>
+	</resolvers>
+</ivysettings>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<ivy-module version="1.0">
+
+	<info organisation="net.lifeless" module="decothread" status="integration">
+	</info>
+	
+	<dependencies>
+		<dependency org="org.junit" name="com.springsource.org.junit" rev="4.5.0" />
+		<dependency org="org.apache.commons" name="com.springsource.org.apache.commons.logging" rev="1.1.1" />
+		<dependency org="org.apache.log4j" name="com.springsource.org.apache.log4j" rev="1.2.15" />
+	</dependencies>
+</ivy-module>
