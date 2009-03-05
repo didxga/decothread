@@ -1,0 +1,59 @@
+decothread - a declarative concurrency library for Java
+
+Author           : Eric Sammer - eric@lifeless.net
+Project URL      : http://wiki.github.com/esammer/decothread
+Original Article : http://esammer.blogspot.com/2009/01/declarative-concurrency-in-java.html
+
+Building the source:
+
+	Requirements:
+		- Apache Ant >= 1.6
+		- Apache Ivy 2.0.0
+		- Java >= 1.5 (tested on the Sun JDK)
+
+	If you have Ant and Ivy properly configured on your machine, you can build
+	the project by simply running the following.
+
+	$ ant compile
+
+	Currently, there is no packaging target, but that will be fixed shortly.
+
+	Troubleshooting the build:
+
+		Q: I get errors about Ant not knowing about the <ivy:blah /> tasks.
+		What do I do?
+		A: The Ivy jar file isn't in Ant's lib directory. You can fix this
+		quickly by either copying or symlinking ivy-2.0.0.jar in Ant's lib
+		directory (which is probably something like /usr/share/ant/lib).
+		Alternatively, if you can't or simply do not want to modify your Ant
+		installation, you can run Ant with the "-lib /path/to/ivy/directory/"
+		argument.
+
+		# Tell Ant where to find ivy-2.0.0.jar:
+		$ ant -lib /usr/share/javalibs/
+
+		Q: The code doesn't compile! Help!
+		A: Let me know and I'll do what I can, but the state of the code is
+		what it is and is provided as is (until things get going at which point
+		I *may* decide to provide whatever level of support I feel like
+		providing - I have a day job).
+
+		Q: Can you add / remove / change feature ...
+		A: Let's talk about it. Maybe, maybe not. Let me know.
+
+Feedback:
+
+	I am very interested in any and all feedback, positive or otherwise
+	(although mildly constructive is always nice). Email me or come comment on
+	my (ugh) blog. (See above.)
+
+License:
+
+	All code and documentation is copyright of the author(s) and is provided AS
+	IS and WITHOUT WARRANTY of any kind whatsoever. Use, build, or read at your
+	own risk!  Currently, this code is being made available under the GNU LGPL
+	license (whatever version is current as of 2009/03/05 00:37EST). A copy is
+	not included because I'm insanely lazy and can't be bothered to place a
+	copy in with the source.  Please refer to the FSF website for details, in
+	the interim.
+
