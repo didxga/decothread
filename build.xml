@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="decothread" default="compile" xmlns:ivy="antlib:org.apache.ivy.ant">
+
+	<property name="lifeless.java.sourceversion" value="1.5" />
+	<property name="lifeless.java.targetversion" value="1.5" />
+	
+	<property name="lifeless.src" value="${basedir}/src" />
+	
+	<property name="lifeless.build" value="${basedir}/build" />
+	<property name="lifeless.build.classes" value="${lifeless.build}/classes" />
+	<property name="lifeless.build.lib.java" value="${lifeless.build}/lib/java" />
+	
+	<property name="lifeless.src.main" value="${lifeless.src}/main" />
+	<property name="lifeless.src.main.java" value="${lifeless.src.main}/java" />
+	<property name="lifeless.src.test" value="${lifeless.src}/test" />
+	<property name="lifeless.src.test.java" value="${lifeless.src.test}/java" />
+	
+	<ivy:settings id="lifeless.ivy.settings" file="${basedir}/ivysettings.xml" />
+	
+	<path id="lifeless.java.classpath">
+		<fileset dir="${lifeless.build.lib.java}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+	
+	<target name="init">
+	</target>
+	
+	<target name="ivy.resolve" description="--> Perform Ivy dependency resolution">
+		<ivy:resolve settingsref="lifeless.ivy.settings" file="${basedir}/ivy.xml" />
+	</target>
+	
+	<target name="ivy.retrieve" description="--> Perform Ivy dependency retrieval" depends="ivy.resolve">
+		<ivy:retrieve settingsref="lifeless.ivy.settings" file="${basedir}/ivy.xml" pattern="${lifeless.build.lib.java}/[artifact]-[revision].[ext]"/>
+	</target>
+	
+	<target name="compile" description="--> Compile all sources" depends="init, ivy.retrieve">
+		<mkdir dir="${lifeless.build}" />
+		<mkdir dir="${lifeless.build.classes}" />
+		<mkdir dir="${lifeless.build.lib.java}" />
+		
+		<javac
+			srcdir="${lifeless.src.main.java}"
+			destdir="${lifeless.build.classes}"
+			source="${lifeless.java.sourceversion}"
+			target="${lifeless.java.targetversion}"
+			classpathref="lifeless.java.classpath" />
+		
+	</target>
+
+	<target name="clean" description="--> Clean all temporary files">
+		<delete dir="${lifeless.build}" />
+	</target>
+
+</project>
