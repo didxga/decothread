@@ -8,8 +8,10 @@
 	<property name="lifeless.src" value="${basedir}/src" />
 	
 	<property name="lifeless.build" value="${basedir}/build" />
-	<property name="lifeless.build.classes" value="${lifeless.build}/classes" />
-	<property name="lifeless.build.lib.java" value="${lifeless.build}/lib/java" />
+	<property name="lifeless.build.main.classes" value="${lifeless.build}/main/classes" />
+	<property name="lifeless.build.test.classes" value="${lifeless.build}/test/classes" />
+	<property name="lifeless.build.main.lib.java" value="${lifeless.build}/main/lib/java" />
+	<property name="lifeless.build.test.lib.java" value="${lifeless.build}/main/lib/java" />
 	
 	<property name="lifeless.src.main" value="${lifeless.src}/main" />
 	<property name="lifeless.src.main.java" value="${lifeless.src.main}/java" />
@@ -18,10 +20,18 @@
 	
 	<ivy:settings id="lifeless.ivy.settings" file="${basedir}/ivysettings.xml" />
 	
-	<path id="lifeless.java.classpath">
-		<fileset dir="${lifeless.build.lib.java}">
+	<path id="lifeless.java.main.classpath">
+		<fileset dir="${lifeless.build.main.lib.java}">
 			<include name="**/*.jar" />
 		</fileset>
+	</path>
+	
+	<path id="lifeless.java.test.classpath">
+		<fileset dir="${lifeless.build.test.lib.java}">
+			<include name="**/*.jar" />
+		</fileset>
+		
+		<path refid="lifeless.java.main.classpath" />
 	</path>
 	
 	<target name="init">
@@ -32,20 +42,20 @@
 	</target>
 	
 	<target name="ivy.retrieve" description="--> Perform Ivy dependency retrieval" depends="ivy.resolve">
-		<ivy:retrieve settingsref="lifeless.ivy.settings" file="${basedir}/ivy.xml" pattern="${lifeless.build.lib.java}/[artifact]-[revision].[ext]"/>
+		<ivy:retrieve settingsref="lifeless.ivy.settings" file="${basedir}/ivy.xml" pattern="${lifeless.build.main.lib.java}/[organisation]-[artifact]-[revision].[ext]"/>
 	</target>
 	
 	<target name="compile" description="--> Compile all sources" depends="init, ivy.retrieve">
 		<mkdir dir="${lifeless.build}" />
-		<mkdir dir="${lifeless.build.classes}" />
-		<mkdir dir="${lifeless.build.lib.java}" />
+		<mkdir dir="${lifeless.build.main.classes}" />
+		<mkdir dir="${lifeless.build.main.lib.java}" />
 		
 		<javac
 			srcdir="${lifeless.src.main.java}"
-			destdir="${lifeless.build.classes}"
+			destdir="${lifeless.build.main.classes}"
 			source="${lifeless.java.sourceversion}"
 			target="${lifeless.java.targetversion}"
-			classpathref="lifeless.java.classpath" />
+			classpathref="lifeless.java.main.classpath" />
 		
 	</target>
 
